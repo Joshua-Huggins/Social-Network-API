@@ -7,6 +7,6 @@ const {
 router.route('/').get(getUsers).post(createUser);
 
 // localhost/api/users/:userId
-router.route('/:userId').get(getSingleUser).destroy(deleteUser);
+router.route('/:userId').get(getSingleUser).delete(deleteUser);
 
 module.exports = router;
