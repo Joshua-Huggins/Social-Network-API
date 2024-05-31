@@ -1,10 +1,10 @@
-const { Thoughts, User } = require('../models');
+const { Thoughts} = require('../models');
 
 module.exports = {
     // get all thoughts
     async getThoughts(req, res) {
         try {
-            const thoughts = await Thoughts.find().populate('users');
+            const thoughts = await Thoughts.find();
             res.json(thoughts);
         } catch (err) {
             res.status(500).json(err);
@@ -13,7 +13,7 @@ module.exports = {
     // get a single thought
     async getOneThought(req, res) {
         try {
-            const thoughts = await Thoughts.findOne({ _id: req.params.thoughtsId }).populate('users');
+            const thoughts = await Thoughts.findById({ _id: req.params.thoughtsId });
 
             if (!thoughts) {
                 return res.status(404).json({ message: 'No thoughts here try again!' });
@@ -34,7 +34,7 @@ module.exports = {
     },
     async noThoughts(req, res) {
         try {
-            const thoughts = await Thoughts.findOneAndDelete({ _id: req.params.thoughtsId });
+            const thoughts = await Thoughts.findByIdAndDelete({ _id: req.params.thoughtsId });
 
             if (!thoughts) {
                 return res.status(404).json({ message: 'No thoughts here try again' });
