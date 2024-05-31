@@ -16,7 +16,7 @@ module.exports = {
     // single user
     async getSingleUser(req, res) {
         try {
-            const user = await User.findOne({ _id: req.Params.userId })
+            const user = await User.findById({ _id: req.params.userId })
             .select('-__v');
 
             if (!user) {
@@ -39,7 +39,7 @@ module.exports = {
     // Delete a user 
     async deleteUser(req, res) {
         try {
-            const user = await User.findOneAndDelete({ _id: req.params.userId });
+            const user = await User.findByIdAndDelete({ _id: req.params.userId });
 
             if (!user) {
                 return res.status(404).json({ message: 'No user with that ID try again!'});
@@ -52,3 +52,5 @@ module.exports = {
         }
     }
 };
+
+// Need to come back and make sure to add friend functions
